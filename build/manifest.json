@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "Magnit",
+    "version": "0.1.0",
+    "description": "Download the BIGGEST magnet link on the page!",
+    "icons": {
+        "48": "icons/th.png"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "*://*.jmvbt.com/*"
+            ],
+            "js": [
+                "javbook.bundle.js"
+            ]
+        }
+    ],
+    "background": {
+        "scripts": [
+            "background.bundle.js"
+        ]
+    },
+    "browser_action": {
+        "default_icon": "icons/th.png",
+        "default_title": "Magn!t"
+    }
+}

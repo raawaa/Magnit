@@ -51,6 +51,7 @@ browser.runtime.onMessage.addListener(request => {
         let magnetData = _.zip(getMagnet(), getSizes());
         let sortedData = _.orderBy(magnetData, 1, 'desc');
         console.log(sortedData);
+        window.location.href=sortedData[0][0];
     }
 })
 

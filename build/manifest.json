@@ -26,6 +26,18 @@
         "default_title": "Magn!t"
     },
     "permissions": [
-        "tabs"
-    ]
+        "tabs",
+        "storage"
+    ],
+    "options_ui": {
+        "page": "options/options.html",
+        "browser_style": true,
+        "open_in_tab": true
+    },
+    "applications": {
+        "gecko": {
+            "id": "magnit-test@raawaa.org",
+            "strict_min_version": "57.0a1"
+        }
+    }
 }

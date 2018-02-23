@@ -6,16 +6,6 @@
     "icons": {
         "48": "icons/th.png"
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "*://*.jmvbt.com/*"
-            ],
-            "js": [
-                "javbook.bundle.js"
-            ]
-        }
-    ],
     "background": {
         "scripts": [
             "background.bundle.js"
@@ -30,7 +20,7 @@
         "storage"
     ],
     "options_ui": {
-        "page": "options/options.html",
+        "page": "options.html",
         "browser_style": true,
         "open_in_tab": true
     },

@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Magnit",
-    "version": "0.1.0",
+    "version": "1.1.0",
     "description": "Download the largest magnet link on a javbook page!",
     "icons": {
         "48": "icons/th.png"
@@ -16,6 +16,7 @@
         "default_title": "Magn!t"
     },
     "permissions": [
+        "*://*/*",
         "tabs",
         "storage"
     ],
@@ -23,11 +24,5 @@
         "page": "options.html",
         "browser_style": true,
         "open_in_tab": true
-    },
-    "applications": {
-        "gecko": {
-            "id": "magnit-test@raawaa.org",
-            "strict_min_version": "57.0a1"
-        }
     }
 }

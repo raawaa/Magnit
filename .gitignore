@@ -1,3 +1,4 @@
 /dist/*.js
+/dist/web-ext-artifacts/
 /node_modules/
 /*.zip

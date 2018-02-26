@@ -8,6 +8,11 @@ const defaultSelectors = {
         url_pattern: "*://*.javbus.info/*",
         magnet_selector: "#magnet-table>tr>td:nth-child(1)>a:first-child",
         size_selector: "#magnet-table>tr>td:nth-child(2)>a:first-child"
+    },
+    zhuixinfan: {
+        url_pattern: "*://*.zhuixinfan.com/*",
+        magnet_selector: "#torrent_url",
+        size_selector: ""
     }
 }
 

@@ -1,6 +1,21 @@
+import fp from "lodash/fp";
+import _ from "lodash";
+import { defaultSelectors } from "./defaults";
+const Promise = require('bluebird')
+
+browser.storage.sync.get('selectors')
+    .then(options => {
+        if (_.isEmpty(options)) {
+            return browser.storage.sync.set({ selectors: defaultSelectors })
+        }
+    }).then();
+
 browser.browserAction.onClicked.addListener(() => {
-    // let currentTab = getCurrentTab();
-    getCurrentTab().then(getHostUrlPattern).then(findRelatedTabs).then(sendCommand).catch(onError);
+    getCurrentTab()
+        .then(getHostUrlPattern)
+        .then(findRelatedTabs)
+        .then(sendCommand)
+        .catch(onError);
 
 
 
@@ -25,11 +40,7 @@ browser.browserAction.onClicked.addListener(() => {
 
 
     function sendCommand(tabs) {
-        for (let tab of tabs) {
-            browser.tabs.sendMessage(tab.id, {
-                command: "magnit"
-            });
-        }
+        return Promise.map(tabs, tab => { return browser.tabs.executeScript(tab.id, { file: '/content.bundle.js' }) })
     }
 
     function onError(error) {

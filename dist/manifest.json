@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Magnit",
-    "version": "1.1.0",
+    "version": "1.1.2",
     "description": "Download the largest magnet link on a javbook page!",
     "icons": {
         "48": "icons/icon.png",

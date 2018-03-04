@@ -57,7 +57,6 @@ function getSizes(selector) {
 //     }
 // })
 
-
 browser.storage.sync.get('selectors')
     .then(options => {
         const currentUrl = window.location.href;
@@ -65,10 +64,8 @@ browser.storage.sync.get('selectors')
             return currentUrl.match(helpers.matchPatternToRegExp(entry.url_pattern));
         });
         if (selector) {
-
             const magnetData = _.zip(getMagnets(selector.magnet_selector), getSizes(selector.size_selector));
             const sortedData = _.orderBy(magnetData, 1, 'desc');
             window.location.href = sortedData[0][0];
-
         }
     });

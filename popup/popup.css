@@ -1,0 +1,7 @@
+body{
+    min-width: 0;
+    padding: 5px;
+}
+.ui.button{
+    margin: 3px;
+}

@@ -1,11 +1,11 @@
-const defaultSelectors = {
+defaultSelectors = {
     javbook: {
         url_pattern: "*://*.jmvbt.com/*",
         magnet_selector: ".content_bt_url>a",
         size_selector: ".dht_dl_size_content"
     },
     javbus: {
-        url_pattern: "*://*.javbus.info/*",
+        url_pattern: "*://*.dmmbus.men/*",
         magnet_selector: "#magnet-table>tr>td:nth-child(1)>a:first-child",
         size_selector: "#magnet-table>tr>td:nth-child(2)>a:first-child"
     },
@@ -16,4 +16,4 @@ const defaultSelectors = {
     }
 }
 
-module.exports = { defaultSelectors }
+// export default defaultSelectors;

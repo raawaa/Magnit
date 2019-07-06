@@ -63,6 +63,35 @@ function matchPatternToRegExp(pattern) {
     return new RegExp(regex);
 }
 
-module.exports = {
-    matchPatternToRegExp
+function text2size(text) {
+    let re = /([0-9\.]+)([GMTK]B)/i;
+    let found = text.match(re);
+    if (found) {
+        let num = found[1];
+        let unit;
+        switch (found[2]) {
+            case 'GB':
+                unit = 1000;
+                break;
+            case 'MB':
+                unit = 1;
+            default:
+                unit = 0;
+                break;
+        }
+        return num * unit;
+    } else {
+        return 0;
+    }
 }
+
+async function getSelectors() {
+    try {
+        return await browser.storage.sync.get('selectors');
+    } catch (error) {
+        return defaultSelectors;
+    }
+}
+// export {
+//     matchPatternToRegExp, text2size
+// }

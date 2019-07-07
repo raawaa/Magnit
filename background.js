@@ -17,7 +17,47 @@ browser.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     }
 })
 
+browser.runtime.onMessage.addListener(async (m, s, r) => {
+    if (m.command == 'copyMagnets') {
+        console.log('mess url:', m.url);
+        let magnets = await gettingMagnets(m.url);
+        console.log('from bg:', magnets.toString());
+        windowData = {
+            // type: "detached_panel",
+            url: "/popup/magnets_panel.html",
+            // width: 550,
+            // height: 400
+        }
+        let createdWindow = await browser.tabs.create(windowData);
+        let magnetsText = magnets.reduce((acc, curr) => curr ? acc + curr + '\\n' : '', '');
+        console.log(magnetsText);
+        let updateTextarea = `document.getElementById('magnets').value='${magnetsText}'`;
+        browser.tabs.executeScript({ code: updateTextarea }).catch(e => console.error('from bg', e));
+    }
+});
 
+function executingContentScript(tabId) {
+    return browser.tabs.executeScript(tabId, { file: '/lodash.min.js' })
+        .then(() => browser.tabs.executeScript(tabId, { file: '/default_selectors.js' }))
+        .then(() => browser.tabs.executeScript(tabId, { file: '/helpers.js' }))
+        .then(() => browser.tabs.executeScript(tabId, { file: '/content.js' }))
+        .catch(e => console.error(e));
+}
+
+async function gettingMagnets(url) {
+    const re = /.*:\/\/(.*?)\/.*/i;
+    const domainMatch = url.match(re)[1];
+    const hostUrlPattern = "*://" + domainMatch + "/*";
+    const relatedTabs = await browser.tabs.query({ url: hostUrlPattern });
+    console.log('relatedTabs:', relatedTabs);
+    return Promise.all(relatedTabs.map(t => executingContentScript(t.id).then(res => res)));
+}
+
+
+function gettingActiveTabUrl() {
+    return browser.tabs.query({ active: true, currentWindow: true })
+        .then(t => t[0].url);
+}
 // async function findRelatedTabs(hostUrlPattern) {
 //     return await browser.tabs.query({ url: hostUrlPattern });
 // }

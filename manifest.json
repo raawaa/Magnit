@@ -25,10 +25,21 @@
         "default_icon": "icons/th.png",
         "default_title": "Magn!t"
     },
+    "options_ui": {
+        "page": "/options_page/options.html",
+        "browser_style": true
+    },
     "permissions": [
         "*://*/*",
+        "<all_urls>",
         "tabs",
         "storage",
         "clipboardWrite"
-    ]
+    ],
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "{11b0229f-80a1-467e-b9e4-25ca38d5d0a1}",
+            "strict_min_version": "42.0"
+        }
+    }
 }

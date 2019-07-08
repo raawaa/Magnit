@@ -86,11 +86,15 @@ function text2size(text) {
 }
 
 async function getSelectors() {
-    try {
-        return await browser.storage.sync.get('selectors');
-    } catch (error) {
-        return defaultSelectors;
-    }
+    let selectors = await browser.storage.sync.get('selectors').catch(e => undefined);
+    return _.isEmpty(selectors)? defaultSelectors:selectors;
+    // try {
+    //     return await browser.storage.sync.get('selectors') ;
+    // } catch (error) {
+    //     console.error(error)
+    //     window.alert('error when getting sync selectors')
+    //     return defaultSelectors;
+    // }
 }
 // export {
 //     matchPatternToRegExp, text2size

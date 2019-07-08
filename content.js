@@ -50,16 +50,16 @@ getSelectors()
     .then(options => {
         const currentUrl = window.location.href;
         console.log(`Current Url:${currentUrl}`);
-        console.log(`options:${options.javbus.url_pattern}`);
         const selector = _.find(options, entry => {
             return currentUrl.match(matchPatternToRegExp(entry.url_pattern));
         });
-        console.log(`selector:${selector}`);
+        console.log(`selector:${selector.url_pattern}`);
         if (selector) {
             const magnetData = _.zip(getMagnets(selector.magnet_selector), getSizes(selector.size_selector));
+            console.log(magnetData)
             const sortedData = _.orderBy(magnetData, 1, 'desc');
             // window.location.href = sortedData[0][0];
-            console.log(sortedData[0][0]);
+            console.log('sortedData: ', sortedData[0][0]);
             return sortedData[0][0];
         }
     });

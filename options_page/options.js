@@ -1,27 +1,25 @@
-// import _ from 'lodash';
-// import { defaultSelectors } from './defaults';
-
-function saveOptions(e) {
+function saveOptions(event) {
     let selectors = JSON.parse(document.querySelector("#selectors").value);
-    browser.storage.sync.set({ selectors })
-        .then(() => console.log(selectors));
-    e.preventDefault();
+    browser.storage.sync.set({ selectors });
+    event.preventDefault();
 }
 
 async function restoreOptions() {
     let selectors = await getSelectors();
-    // console.debug(res);
     document.querySelector("#selectors").value = JSON.stringify(selectors, null, 4)
 }
 
-async function resetOptions(e) {
-    await browser.storage.sync.set({ selectors: defaultSelectors });
-    // console.debug('reseting');
-    document.querySelector('#selectors').value = JSON.stringify(defaultSelectors, null, 4);
-    // browser.runtime.sendMessage({ command: "regist", data: defaultSelectors });
-    e.preventDefault();
+async function resetOptions(event) {
+    try {
+        await browser.storage.sync.set({ selectors: defaultSelectors });
+
+    } catch (error) {
+        window.alert('error');
+    }
+    document.getElementById('selectors').value = JSON.stringify(defaultSelectors, null, 4);
+    event.preventDefault();
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
-document.querySelector("form").addEventListener("submit", saveOptions);
-document.querySelector("form").addEventListener("reset", resetOptions);
+document.getElementById('selectors_config').addEventListener("submit", saveOptions);
+document.getElementById('selectors_config').addEventListener("reset", resetOptions);
